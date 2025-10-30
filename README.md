@@ -1,73 +1,48 @@
-# React + TypeScript + Vite
+# Proyecto Purely — React + TypeScript (Vite)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Requisitos mínimos
+- Node.js (recomendado v18+) y npm
+- Docker Desktop (opcional)
 
-Currently, two official plugins are available:
+## Clonar el repositorio
+## (SSH)
+git clone git@github.com:JhoanLT/purely.git
+## (HTTPS)
+git clone https://github.com/JhoanLT/purely.git
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+cd `purely`
+git checkout main
 
-## React Compiler
+## Ejecutar sin Docker (modo local)
+1. Comprobar versiones:
+   node -v
+   npm -v
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. Instalar dependencias (una sola vez):
+   npm install
 
-## Expanding the ESLint configuration
+3. Iniciar el servidor de desarrollo:
+   npm run dev
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+4. Abrir en el navegador:
+   http://localhost:5173
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+5. Detener:
+   Presiona Ctrl+C en la terminal
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Levantar con Docker Compose (si ya tienes el archivo en el repo)
+- Levantar en primer plano (no hace falta `--build` si el compose monta el código):
+  docker compose up
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Usar un archivo específico:
+  docker compose -f `docker-compose.dev.yml` up
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Ejecutar en segundo plano:
+  docker compose up -d
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Parar y limpiar:
+  docker compose down
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Nota rápida
+Si los cambios no se reflejan, intenta reiniciar con:
+docker compose up (o docker compose up --build si cambias dependencias)
