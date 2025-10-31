@@ -1,4 +1,4 @@
-# Proyecto Funny — React + TypeScript (Vite)
+# Proyecto Purely — React + TypeScript (Vite)
 
 ## Requisitos mínimos
 - Node.js (recomendado v18+) y npm
