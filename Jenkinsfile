@@ -1,29 +1,36 @@
 pipeline {
-  agent {
-    docker {
-      image 'node:20-bullseye'
-      args '-u root:root'
-    }
-  }
+  agent any
+  tools { nodejs 'node20' }
+
   options { timestamps() }
 
   stages {
-    stage('Checkout') { steps { checkout scm } }
+    stage('Checkout') {
+      steps { checkout scm }
+    }
 
-    stage('Versions') {
-      steps { sh 'node -v && npm -v' }
+    stage('Versiones') {
+      steps {
+        sh 'node -v && npm -v'
+      }
     }
 
     stage('Install') {
-      steps { sh 'npm ci' }
+      steps {
+        sh 'npm ci'
+      }
     }
 
     stage('Build') {
-      steps { sh 'npm run build' }
+      steps {
+        sh 'npm run build'
+      }
     }
 
-    stage('Archive dist') {
-      steps { archiveArtifacts artifacts: 'dist/**/*', onlyIfSuccessful: true }
+    stage('Artefacto (dist)') {
+      steps {
+        archiveArtifacts artifacts: 'dist/**/*', onlyIfSuccessful: true
+      }
     }
   }
 
